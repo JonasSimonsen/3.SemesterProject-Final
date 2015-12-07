@@ -8,6 +8,7 @@
     <class>entity.Flights</class>
     <class>entity.Passenger</class>
     <class>entity.Reservation</class>
+    <class>entity.User</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:8889/PU-Local?zeroDateTimeBehavior=convertToNull"/>
