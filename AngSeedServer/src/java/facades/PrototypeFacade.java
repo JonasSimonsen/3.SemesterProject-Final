@@ -5,6 +5,7 @@
  */
 package facades;
 
+import deploy.DeploymentConfiguration;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -24,7 +25,7 @@ import javax.persistence.Persistence;
 public class PrototypeFacade
 {
 
-    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU-Local");
+    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory(DeploymentConfiguration.PU_NAME);
     private static URLConnection urlConn = null;
     private static InputStreamReader in = null;
     private static StringBuilder sb = new StringBuilder();

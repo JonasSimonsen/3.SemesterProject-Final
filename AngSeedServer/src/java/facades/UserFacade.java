@@ -1,5 +1,6 @@
 package facades;
 
+import deploy.DeploymentConfiguration;
 import entity.User;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
@@ -14,8 +15,8 @@ import security.PasswordHash;
 
 public class UserFacade {
 
-    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU-Local");
-//    private EntityManagerFactory emf = Persistence.createEntityManagerFactory(DeploymentConfiguration.PU_NAME);
+//    private static EntityManagerFactory emf = Persistence.createEntityManagerFactory("PU-Local");
+    private EntityManagerFactory emf = Persistence.createEntityManagerFactory(DeploymentConfiguration.PU_NAME);
 
     public UserFacade() {
         //Test Users
