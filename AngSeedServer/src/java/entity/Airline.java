@@ -6,44 +6,44 @@
 package entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  *
  * @author Andreas & Jonas
  */
 @Entity
-public class Airline implements Serializable
-{
+public class Airline implements Serializable {
+    private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    private String url;
+    private String name;
+    
+    private String URL;
 
-    public Airline()
-    {
+    
+//    @OneToMany(mappedBy = "airlineFlights")
+//    List<FlightEntity> flights = new ArrayList();
+    
+    public Airline(String Name, String URL){
+    this.name = Name;
+    this.URL = URL;
+    }
+    
+    public Airline(){}
+    
+    public String getName() {
+        return name;
     }
 
-    public int getId()
-    {
-        return id;
+    public void setName(String name) {
+        this.name = name;
     }
-
-    public void setId(int id)
-    {
-        this.id = id;
-    }
-
-    public String getUrl()
-    {
-        return url;
-    }
-
-    public void setUrl(String url)
-    {
-        this.url = url;
-    }  
 }

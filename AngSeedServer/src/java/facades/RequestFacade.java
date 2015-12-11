@@ -32,7 +32,7 @@ public class RequestFacade
     {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        urls = em.createQuery("SELECT u.url from Airline u").getResultList();
+        urls = em.createQuery("SELECT u.URL from Airline u").getResultList();
         em.getTransaction().commit();
         return urls;
     }

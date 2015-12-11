@@ -297,14 +297,35 @@
 </thead>
 <tbody>
     <tr ng-repeat="data in data">
-            <td>{{data.airline}} </td>
-             <td>{{data.numberOfSeats}} </td>
-            <td>{{data.date}} </td>
-            <td>{{data.totalPrice}} </td>
-            <td>{{data.flightID}} </td>
-            <td>{{data.traveltime}} </td> 
-            <td>{{data.origin}} </td>
-            <td>{{data.destination}} </td>
-        </tr>
+        <td>{{data.airline}} </td>
+        <td>{{data.numberOfSeats}} </td>
+        <td>{{data.date}} </td>
+        <td>{{data.totalPrice}} </td>
+        <td>{{data.flightID}} </td>
+        <td>{{data.traveltime}} </td> 
+        <td>{{data.origin}} </td>
+        <td>{{data.destination}} </td>
+        <td><button type="button" class="btn btn-danger">Reserve</button></td>
+        <!--ng-bind="assign(data.flightID, data.numberOfSeats)"-->
+    </tr>
 </tbody>
 </table>
+<div class="form-group">
+    <input type="text" ng-model="flightID" placeholder="flightID">
+    <input type="text" ng-model="numberOfSeats" placeholder="seats">
+    <input type="text" ng-model="ReserveeName" placeholder="name">
+    <input type="text" ng-model="ReservePhone" placeholder="phone">
+    <input type="text" ng-model="ReserveeEmail" placeholder="email">
+    <input type="text" ng-model="passenger.firstname" placeholder="passenger name">
+    <input type="text" ng-model="passenger.lastname" placeholder="passenger lastname">
+    <button type="button" ng-click="addPassenger(passenger.firstname, passenger.lastname)">Add Passenger</button>
+    <button type="button" ng-click="reserve(flightID, numberOfSeats, ReserveeName, ReservePhone, ReserveeEmail, passengers)">Reserve</button>
+    <table>
+        <tbody>
+            <tr ng-repeat="passenger in passengers">
+                <td>{{passenger.firstname}}</td>
+                <td>{{passenger.lastname}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
