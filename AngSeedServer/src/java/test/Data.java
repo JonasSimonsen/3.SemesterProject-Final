@@ -50,7 +50,8 @@ public class Data {
         passengers.add(pas1);
         passengers.add(pas2);
         //Reservation res1 = new Reservation(flight1.getFlightNumber(), 3, "Peter Hansen", "83838383", "Peter@lol.dk", passengers);
-        Reservation res2 = new Reservation("Peter@lol.dk", flight1.getFlightNumber(), 3, "Peter", "11223344", "NotAFakeAccount@Lol.gg", passengers);
+
+        Reservation res2 = new Reservation("http://angularairline-plaul.rhcloud.com/api/flightreservation", "COL2216x100x2016-01-04T15:00:00.000Z", 3, "userboy", "John Doe", "88888888", "hej@lol.dk", passengers);
 //        URL url1 = new URL("Angular Airline", "http://angularairline-plaul.rhcloud.com/");
 //        URL url2 = new URL("SARS", "http://SARS.rhcloud.com/"
 //                + "");

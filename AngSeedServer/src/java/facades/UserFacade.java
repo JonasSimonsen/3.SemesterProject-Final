@@ -1,15 +1,18 @@
 package facades;
 
 import deploy.DeploymentConfiguration;
+import entity.Reservation;
 import entity.User;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import security.PasswordHash;
 
@@ -87,5 +90,22 @@ public class UserFacade {
                 em.close();
             }
         }
+    }
+    
+        public List<Reservation> getMyReservations(String username){
+        EntityManager em = emf.createEntityManager();
+        List<Reservation> ResList = new ArrayList();
+            try {
+            Query que = em.createNativeQuery("SELECT * FROM reservation Where username =" + "'"+ username + "'", Reservation.class);
+            ResList = que.getResultList();
+            if(ResList.isEmpty()){
+                return null;
+            }
+            return ResList;
+        } catch (Exception e) {
+                System.out.println(e.getMessage());
+        }
+        
+        return null;
     }
 }

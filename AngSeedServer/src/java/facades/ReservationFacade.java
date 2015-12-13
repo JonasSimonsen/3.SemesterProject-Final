@@ -44,10 +44,11 @@ public class ReservationFacade {
 
         EntityManager em = emf.createEntityManager();
 
-       Gson gson = new Gson();
-       
-       //URL på det airline som der skal bestilles hos..
+        Gson gson = new Gson();
+
+        //URL på det airline som der skal bestilles hos..
         String url = newReservation.getAirlineURL();
+        String bookingURL = url + "flightreservation";
 
         //Vi laver et json objekt som inderholder info til det airline vi vil bestille hos
         JsonObject jsonObj = new JsonObject();
@@ -75,7 +76,7 @@ public class ReservationFacade {
 
         //Her laves en http-connection til det givne airlines url,
         // samt json-objektet sendes med som en string
-        HttpURLConnection con = (HttpURLConnection) new URL(url).openConnection();
+        HttpURLConnection con = (HttpURLConnection) new URL(bookingURL).openConnection();
         con.setRequestProperty("Content-Type", "application/json;");
         con.setRequestProperty("Accept", "application/json");
         con.setRequestProperty("Method", "POST");
@@ -96,28 +97,31 @@ public class ReservationFacade {
         System.out.println(response);
         System.out.println(con.getResponseCode());
         System.out.println(con.getResponseMessage());
-        
+
         Reservation ResserRes = gson.fromJson(response, Reservation.class);
-        
+
         newReservation.setOrigin(ResserRes.getOrigin());
         newReservation.setDestinaion(ResserRes.getDestinaion());
         newReservation.setFlightTime(ResserRes.getFlightTime());
         newReservation.setDate(ResserRes.getDate());
-        if(con.getResponseCode() == 200){
-        try {
-            em.getTransaction().begin();
-            em.persist(newReservation);
-            em.getTransaction().commit();
-            em.close();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        }else{
-            System.out.println("couldnt save your Reservation at this time: " + con.getResponseMessage());
+        if (con.getResponseCode() == 200) {
+            try {
+                em.getTransaction().begin();
+                em.persist(newReservation);
+                em.getTransaction().commit();
+                em.close();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        } else {
+            System.out.println("We couldn't save your Reservation at this time: " + con.getResponseMessage());
         }
         //Her skal returneres 
     }
 
+    public void Lars(Reservation newReservation) throws MalformedURLException, IOException {
+
+    }
 
     public static void main(String[] args) throws ProtocolException, IOException {
 
@@ -127,7 +131,7 @@ public class ReservationFacade {
         Passenger p2 = new Passenger("Lotte", "Lim");
         passengers.add(p1);
         passengers.add(p2);
-        Reservation r = new Reservation("http://angularairline-plaul.rhcloud.com/api/flightreservation", "COL2216x100x2016-01-04T15:00:00.000Z", 3, "John Doe", "88888888", "hej@lol.dk", passengers);
+        Reservation r = new Reservation("http://angularairline-plaul.rhcloud.com/api/flightreservation", "COL2216x100x2016-01-04T15:00:00.000Z", 3, "userboy", "John Doe", "88888888", "hej@lol.dk", passengers);
 
         rf.makeReservation(r);
     }

@@ -30,8 +30,8 @@ public class FlightEntity implements Serializable {
     @ManyToOne
     private Airline airlineFlights;
     
-    @OneToMany(mappedBy = "flightInstances")
-    List<FlightInstance> flightInstances = new ArrayList();
+//    @OneToMany(mappedBy = "flightInstances")
+//    List<FlightInstance> flightInstances = new ArrayList();
     
     public FlightEntity(String flightNumber, int numberOfSeats, Airline airlineFlights) {
         this.flightNumber = flightNumber;
@@ -66,13 +66,13 @@ public class FlightEntity implements Serializable {
         this.airlineFlights = airlineFlights;
     }
 
-    public List<FlightInstance> getFlightInstances() {
-        return flightInstances;
-    }
-
-    public void setFlightInstances(List<FlightInstance> flightInstances) {
-        this.flightInstances = flightInstances;
-    }
+//    public List<FlightInstance> getFlightInstances() {
+//        return flightInstances;
+//    }
+//
+//    public void setFlightInstances(List<FlightInstance> flightInstances) {
+//        this.flightInstances = flightInstances;
+//    }
     
     
 

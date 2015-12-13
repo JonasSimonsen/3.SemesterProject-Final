@@ -1,4 +1,4 @@
-<form class="navbar-form navbar-left" role="search">
+<form class="navbar-form navbar-left" role="search" >
     <div class="form-group" >
         <select name="From" class="form-control" ng-model="origin" required="">
             <option value="" disabled selected hidden>Select departing airport</option>
@@ -295,7 +295,7 @@
     <th>Departure Airport</th>
     <th>Destination Airport</th>
 </thead>
-<tbody>
+<tbody> 
     <tr ng-repeat="data in data">
         <td>{{data.airline}} </td>
         <td>{{data.numberOfSeats}} </td>
@@ -305,12 +305,68 @@
         <td>{{data.traveltime}} </td> 
         <td>{{data.origin}} </td>
         <td>{{data.destination}} </td>
-        <td><button type="button" class="btn btn-danger">Reserve</button></td>
+
+        <td><button type="button" class="btn btn-info" href="#bookingModal" ng-click="travelInfo(data.url, data.flightID, numberOfSeats)">Book</button></td>
         <!--ng-bind="assign(data.flightID, data.numberOfSeats)"-->
     </tr>
 </tbody>
 </table>
-<div class="form-group">
+
+
+
+
+<h4 class="modal-title">Make your reservation</h4>
+
+<div>
+    <form>
+        <div class="form-group">
+            <label for="fullName" class="col-sm-2 control-label">Full name</label>
+            <input type="text" class="form-control" id="fullName" ng-model="bookingResName">
+        </div>
+        <div class="form-group">
+            <label for="phone" class="col-sm-2 control-label">Phone</label>
+            <input type="text" class="form-control" id="phone" ng-model="bookingResPhone">
+        </div>
+        <div class="form-group">
+            <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+            <input type="email" class="form-control" id="inputEmail" ng-model="bookingResEmail">
+        </div>
+        <div class="form-group">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Passengers: {{numberOfSeats}}</th>
+                        <th><label for="pasFirstName" class="col-sm-2 control-label">Firstname</label></th>
+                        <th><label for="pasLastName" class="col-sm-2 control-label">Lastname</label></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="i in numOfTickets(numberOfSeats) track by $index">
+                        <td>
+                            <label>{{$index + 1}}</label>
+                        </td>
+
+                        <td>
+                            <input type="text" class="form-control" placeholder="Firstname" ng-model="bookingPasFirstname">
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" placeholder="Lastname" ng-model="bookingPasLastname">
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </form>
+</div>
+<button ng-click="bookTickets()">Book</button>
+
+
+
+
+
+
+<!--<div class="form-group">
     <input type="text" ng-model="flightID" placeholder="flightID">
     <input type="text" ng-model="numberOfSeats" placeholder="seats">
     <input type="text" ng-model="ReserveeName" placeholder="name">
@@ -328,4 +384,4 @@
             </tr>
         </tbody>
     </table>
-</div>
+</div>-->

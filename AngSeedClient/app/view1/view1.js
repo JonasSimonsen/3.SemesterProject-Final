@@ -9,9 +9,72 @@ angular.module('myApp.view1', ['ngRoute'])
                 });
             }])
         .controller('View1Ctrl', function ($http, $scope) {
-                $scope.passengers = [
-                ];
 
+            $scope.searchClicked = false;
+         
+            $scope.bookingFlightId = "";
+            $scope.bookingNumOfSeats = "";
+            
+//            $scope.bookingUserName = "";
+//            $scope.bookingUrl = "";
+            
+            $scope.bookingResName = "";
+            $scope.bookingFlightId = "";
+            $scope.bookingResPhone = "";
+            $scope.bookingResEmail = "";
+            $scope.bookingPassengers = [];
+
+            $scope.travelInfo = function (flightId, numOfSeats) {
+//                $scope.bookingURL = url;
+                $scope.bookingFlightId = flightId;
+                $scope.bookingNumOfSeats = numOfSeats;
+                    console.log("bookingId: " + $scope.bookingFlightId)
+                    console.log("seats: " + $scope.bookingNumOfSeats)
+                    console.log($scope.bookingURL);
+            };
+            $scope.numOfTickets = function (num) {
+                var arrayForNgRepeat = [];
+                for (var i = 0, max = num; i < max; i++) {
+                    arrayForNgRepeat.push(i);
+                }
+                return arrayForNgRepeat;
+            };
+            $scope.createPasObjects = function () {
+                for (var i = 0; i < $scope.bookingNumOfSeats; i++) {
+                    var passenger = {};
+                    passenger.firstName = $scope.bookingPasFirstname;
+                    passenger.lastName = $scope.bookingPasLastname
+                    $scope.bookingPassengers.push(passenger);
+                }
+            };
+            $scope.bookTickets = function () {
+//                $scope.createPasObjects();
+                var data = {
+                    airlineURL: "http://angularairline-plaul.rhcloud.com/api/",
+                    UserName: "user",
+                    flightID: $scope.bookingFlightId,
+                    numberOfSeats: $scope.bookingNumOfSeats,
+                    ReserveeName: $scope.bookingResName,
+                    ReservePhone: $scope.bookingResPhone,
+                    ReserveeEmail: $scope.bookingResEmail,
+                    Passengers: [{firstName: "asd", lastName: "asd"}]
+                };
+                var JsonData = JSON.stringify(data);
+                var request = {
+                    method: 'POST',
+                    url: "api/reservation",
+                    responseType: 'json',
+                    data: JsonData
+                };
+                    console.log("Data fra booking: " + JsonData);
+                $http(request)
+                        .success(function (data) {
+                                console.log("data: " + data);
+                        })
+                        .error(function (response) {
+                                console.log("Fejl i POST - booking!");
+                        });
+            };
             $scope.search = function () {
                 var baseUrl = 'api/flightinfo/';
                 var year = $scope.myDate.getFullYear();
@@ -33,21 +96,6 @@ angular.module('myApp.view1', ['ngRoute'])
                     alert("LORT");
                 });
             };
-            $scope.reserve = function (flightID, numberOfSeats, ReserveeName, ReservePhone, ReserveeEmail, passengers) {
-                $scope.flightID = flightID;
-                $scope.numberOfSeats = numberOfSeats;
-                $scope.ReserveeName = ReserveeName;
-                $scope.ReservePhone = ReservePhone;
-                $scope.ReserveeEmail = ReserveeEmail;
-                $scope.passengers = passengers;
-            };
-            $scope.addPassenger = function (firstname, lastname) {
-
-                $scope.passenger = {
-                    firstname: firstname,
-                    lastname: lastname
-                };
-                $scope.passengers.push(passenger);
-            };
         });
+
         

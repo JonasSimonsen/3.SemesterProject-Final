@@ -28,6 +28,7 @@ public class Reservation implements Serializable {
     private String flightID;
     private int numberOfSeats;
     @Id
+    private String UserName;
     private String ReserveeName;
     private String ReservePhone;
     private String ReserveeEmail;
@@ -46,10 +47,11 @@ public class Reservation implements Serializable {
 //    @OneToMany(mappedBy = "ReservationPassenger")
 //    private List<Passenger> passengers = new ArrayList();
 
-    public Reservation(String airlineURL, String flightID, int numberOfSeats, String ReserveeName, String ReserveePhone, String ReserveeEmail, List<Passenger> Passengers) {
+    public Reservation(String airlineURL, String flightID, int numberOfSeats,String username, String ReserveeName, String ReserveePhone, String ReserveeEmail, List<Passenger> Passengers) {
         this.airlineURL = airlineURL;
         this.flightID = flightID;
         this.numberOfSeats = numberOfSeats;
+        this.UserName = username;
         this.ReserveeName = ReserveeName;
         this.ReservePhone = ReserveePhone;
         this.ReserveeEmail = ReserveeEmail;

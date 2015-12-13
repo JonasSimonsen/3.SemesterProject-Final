@@ -29,8 +29,8 @@ public class Airline implements Serializable {
     private String URL;
 
     
-//    @OneToMany(mappedBy = "airlineFlights")
-//    List<FlightEntity> flights = new ArrayList();
+    @OneToMany(mappedBy = "airlineFlights")
+    List<FlightEntity> flights = new ArrayList();
     
     public Airline(String Name, String URL){
     this.name = Name;
